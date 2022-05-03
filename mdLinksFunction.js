@@ -36,11 +36,9 @@ const read = (pathUser) => {
         reject(error);
         throw error;
       }
-// Se crea una constante donde se utiliza la librería markdownLinkExtractor, para extraer los links de los archivos. 
 
-      const { links } = markdownLinkExtractor(file);
-      console.log(markdownLinkExtractor(file))
-/*       links.forEach(link =>
+      /* console.log(markdownLinkExtractor(file)) */
+      /*       links.forEach(link =>
         linkCheck(link,(err, result) => {
         if(err) {
           console.log(err);
@@ -49,10 +47,20 @@ const read = (pathUser) => {
         console.log(JSON.stringify(result, null, 4));
         console.log(result.statusCode);
       })) */
-      resolve(file)
+      resolve(file);
     });
   });
 };
-read(pathUser).then(() => {
-  console.log("Esta es la prueba de la función read");
+read(pathUser).then((file) => {
+  // Se crea una constante donde se utiliza la librería markdownLinkExtractor, para extraer los links de los archivos.
+
+  const { links } = markdownLinkExtractor(file, (extended = true));
+
+  let objetResolve = {};
+  links.map((link) => {
+    objetResolve.href = link.href,
+    objetResolve.text = link.text,
+    objetResolve.file = pathUser;
+    console.log(objetResolve.file, objetResolve.href, objetResolve.text);
+  });
 });
