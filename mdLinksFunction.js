@@ -30,7 +30,7 @@ const identifyFile = (pathUser) => {
 
 identifyFile(pathUser);
 
-/* const read = (pathUser) => {
+const read = (pathUser) => {
   return new Promise((resolve, reject) => {
     fs.readFile(pathUser, "utf-8", (error, file) => {
       if (error) {
@@ -43,7 +43,7 @@ identifyFile(pathUser);
 };
 read(pathUser).then(() => {
   console.log("Esta es la prueba de la función read");
-}); */
+});
 
 
 
