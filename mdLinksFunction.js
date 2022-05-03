@@ -1,8 +1,8 @@
 const fs = require("fs");
 const { resolve } = require("path");
 const path = require("path");
-const markdownLinkExtractor = require('markdown-link-extractor');
-
+const markdownLinkExtractor = require("markdown-link-extractor");
+const linkCheck = require("link-check");
 
 //Esta constante guarda la ruta que se ingrese por consola
 const pathUser = process.argv[2];
@@ -18,7 +18,6 @@ const validationPath = (route) => {
     return pathUser;
   }
 };
-/* validationPath(pathUser); */
 
 const identifyFile = (pathUser) => {
   if (path.extname(validationPath(pathUser)) === ".md") {
@@ -37,13 +36,23 @@ const read = (pathUser) => {
         reject(error);
         throw error;
       }
-      resolve(file);
+// Se crea una constante donde se utiliza la librería markdownLinkExtractor, para extraer los links de los archivos. 
+
+      const { links } = markdownLinkExtractor(file);
+      console.log(markdownLinkExtractor(file))
+/*       links.forEach(link =>
+        linkCheck(link,(err, result) => {
+        if(err) {
+          console.log(err);
+          return;
+        }
+        console.log(JSON.stringify(result, null, 4));
+        console.log(result.statusCode);
+      })) */
+      resolve(file)
     });
   });
 };
 read(pathUser).then(() => {
   console.log("Esta es la prueba de la función read");
 });
-
-
-
