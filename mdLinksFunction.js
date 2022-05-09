@@ -17,12 +17,14 @@ const validationPath = (route) => {
   }
 };
 
+// identifyFile, permite identificar si el archivo que estamos leyendo es .md
 const identifyFile = (pathUser) => {
   const isMd = path.extname(validationPath(pathUser)) === ".md";
   console.log(isMd, "Es md");
   return isMd;
 };
 
+// Función para leer archivo
 const read = (pathUser) => {
   return new Promise((resolve, reject) => {
     fs.readFile(pathUser, "utf-8", (error, contentfile) => {
@@ -38,6 +40,7 @@ const read = (pathUser) => {
   });
 };
 
+// Función que permite validar el estado del link y retorna un objeto con href, text, file, status y statusCode
 const validateLink = (objectArray) => {
   return new Promise((resolve, reject) => {
     const link = objectArray.href;
@@ -64,9 +67,31 @@ const validateLink = (objectArray) => {
   });
 };
 
-const validate = process.argv[3];
-const isValidate = (validate === '--validate') ? true : false;
-console.log(validate, isValidate);
+let statsReturn = {};
+const linkStats = (arrayObject) => {
+    const total = arrayObject.length;
+    const sizeLinks = arrayObject.map((e) => e.href);
+    const uniqueLinks = new Set(sizeLinks);
+    const unique = [...uniqueLinks].length;
+    statsReturn.total = total;
+    statsReturn.unique = unique;
+    return statsReturn;
+} 
+
+// const optionsView = {};
+let validate = '';
+let stats = '';
+const thirdPosition = () => {
+    if(process.argv[3] === '--validate') {
+        validate = true;   
+    } else if (process.argv[3] === '--stats') {
+        stats = true;
+    }
+    console.log(validate, 'SOY VALIDATE')
+    console.log(stats, 'SOY STATS')
+}
+
+
 
 
 const mdLinks = (path, options) => {
@@ -93,9 +118,12 @@ const mdLinks = (path, options) => {
         return basicInfoLinks;
       })
       .then((res) => {
-        if (options.validate !== true) {
+        if((validate !== true) && (stats !== true)) {
           resolve(res);
-        } else {
+        } else if (stats === true) {
+          resolve (linkStats(res))
+        }
+        else {
           resolve(Promise.all(res.map((e) => validateLink(e))));
         }
       })
@@ -109,7 +137,7 @@ const mdLinks = (path, options) => {
   });
 };
 
-mdLinks(pathUser, {validate:isValidate})
+mdLinks(pathUser, thirdPosition())
   .then((res) => {
     console.log(res, "Este es el llamado de la funcion mdLinks");
   })
