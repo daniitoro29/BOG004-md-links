@@ -23,7 +23,7 @@ const identifyFile = (pathUser) => {
   return isMd;
 };
 
-/* const read = (pathUser) => {
+const read = (pathUser) => {
   return new Promise((resolve, reject) => {
     fs.readFile(pathUser, "utf-8", (error, contentfile) => {
       if (error) {
@@ -36,7 +36,7 @@ const identifyFile = (pathUser) => {
       resolve(contentfile);
     });
   });
-}; */
+};
 
 /* const validateLink = (objectArray) => {
   return new Promise((resolve, reject) => {
