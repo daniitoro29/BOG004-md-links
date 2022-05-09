@@ -64,12 +64,12 @@ const validateLink = (objectArray) => {
   });
 };
 
-/* const validate = process.argv[3];
+const validate = process.argv[3];
 const isValidate = (validate === '--validate') ? true : false;
-console.log(validate, isValidate); */
+console.log(validate, isValidate);
 
 
-/* const mdLinks = (path, options) => {
+const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     // Ingresa path
     //Función que convierte la ruta relativa en absoluta
@@ -107,10 +107,10 @@ console.log(validate, isValidate); */
     //Función que valida el estado de los links
     // Función de estadísticas
   });
-}; */
-/* 
+};
+
 mdLinks(pathUser, {validate:isValidate})
   .then((res) => {
     console.log(res, "Este es el llamado de la funcion mdLinks");
   })
-  .catch((err) => console.log(err, "Esto es un error  de mdlink")); */
+  .catch((err) => console.log(err, "Esto es un error  de mdlink"));
