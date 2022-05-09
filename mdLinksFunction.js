@@ -38,7 +38,7 @@ const read = (pathUser) => {
   });
 };
 
-/* const validateLink = (objectArray) => {
+const validateLink = (objectArray) => {
   return new Promise((resolve, reject) => {
     const link = objectArray.href;
     linkCheck(link, (err, result) => {
@@ -62,7 +62,7 @@ const read = (pathUser) => {
       });
     });
   });
-}; */
+};
 
 /* const validate = process.argv[3];
 const isValidate = (validate === '--validate') ? true : false;
