@@ -20,7 +20,6 @@ const validationPath = (route) => {
 // identifyFile, permite identificar si el archivo que estamos leyendo es .md
 const identifyFile = (pathUser) => {
   const isMd = path.extname(validationPath(pathUser)) === ".md";
-  console.log(isMd, "Es md");
   return isMd;
 };
 
@@ -67,16 +66,19 @@ const validateLink = (objectArray) => {
   });
 };
 
-let statsReturn = {};
 const linkStats = (arrayObject) => {
     const total = arrayObject.length;
     const sizeLinks = arrayObject.map((e) => e.href);
     const uniqueLinks = new Set(sizeLinks);
     const unique = [...uniqueLinks].length;
-    statsReturn.total = total;
-    statsReturn.unique = unique;
-    return statsReturn;
+    return {total, unique};
 } 
+
+const validateAndStats = (arrayObject, totalUnique) => {
+  let broken = arrayObject.filter((e) => e.status === 'Fail').length;
+  // Los ... indican que pasa de {total: 82, unique: 77} a total: 82, unique: 77 -- Elimina el objeto y deja solo las propiedades
+  return {...totalUnique, broken:broken};
+}
 
 // const optionsView = {};
 let validate = '';
@@ -86,9 +88,9 @@ const thirdPosition = () => {
         validate = true;   
     } else if (process.argv[3] === '--stats') {
         stats = true;
+    } if (process.argv[4] === '--stats') {
+      stats = true;
     }
-    console.log(validate, 'SOY VALIDATE')
-    console.log(stats, 'SOY STATS')
 }
 
 
@@ -119,15 +121,30 @@ const mdLinks = (path, options) => {
       })
       .then((res) => {
         if((validate !== true) && (stats !== true)) {
-          resolve(res);
-        } else if (stats === true) {
-          resolve (linkStats(res))
+          return(res);
+        } else if ((validate === true) && (stats === true)) {
+          return(Promise.all(res.map((e) => validateLink(e))));
+        } 
+        else if (stats === true) {
+          return(linkStats(res));
         }
         else {
-          resolve(Promise.all(res.map((e) => validateLink(e))));
+          return(Promise.all(res.map((e) => validateLink(e))));
         }
       })
-
+      .then((res) => {
+        if((validate !== true) && (stats !== true)) {
+          resolve(res.map((e)=> `${e.file} ${e.href} ${e.text}\n`).join(''));
+        } else if ((validate === true) && (stats === true)) {
+          resolve(validateAndStats(res,linkStats(res)));
+        } 
+        else if (stats === true) {
+          resolve(`Total: ${res.total}\nUnique: ${res.unique}`);
+        }
+        else {
+          resolve(res.map((e)=> `${e.file} ${e.href} ${e.statusCode} ${e.status} ${e.text}\n`).join(''));
+        }
+      })
       .catch((error) => {
         console.log(error);
         reject("Hubo un problema con la ejecución");
@@ -139,6 +156,6 @@ const mdLinks = (path, options) => {
 
 mdLinks(pathUser, thirdPosition())
   .then((res) => {
-    console.log(res, "Este es el llamado de la funcion mdLinks");
+    console.log(res);
   })
-  .catch((err) => console.log(err, "Esto es un error  de mdlink"));
+  .catch((err) => err, "Esto es un error  de mdlink");
