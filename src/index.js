@@ -94,7 +94,6 @@ const mdLinks = (path, options) => {
       .then((contentfile) => {
         // Se crea una constante donde se utiliza la librería markdownLinkExtractor, para extraer los links de los archivos.
         const { links } = markdownLinkExtractor(contentfile, (extended = true));
-        console.log(links, typeof contentfile, contentfile , 'epaaaaaaaaaaaa')
         const arrayLinks = links.map((link) => {
           let objetResolve = {};
           objetResolve.file = pathUser;
