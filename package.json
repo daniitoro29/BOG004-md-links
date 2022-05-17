@@ -13,7 +13,12 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.0"
+  },
   "scripts": {
     "test": "jest --verbose --coverage"
   },
@@ -23,6 +28,9 @@
   },
   "author": "Daniela Toro",
   "license": "ISC",
+  "bin": {
+    "mdLinks": "./cli.js"
+  },
   "bugs": {
     "url": "https://github.com/daniitoro29/BOG004-md-links/issues"
   },
