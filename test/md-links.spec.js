@@ -1,9 +1,9 @@
-const { read } = require("../src/index.js");
-const { validationPath } = require("../src/index.js");
-const { identifyFile } = require("../src/index.js");
-const { validateLink } = require("../src/index.js");
+const { read } = require("../index.js");
+const { validationPath } = require("../index.js");
+const { identifyFile } = require("../index.js");
+const { validateLink } = require("../index.js");
 /* const { mdLinks } = require('../src/cli.js') */
-const { mdLinks } = require('../src/index.js')
+const { mdLinks } = require('../index.js')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 jest.mock("link-check");
