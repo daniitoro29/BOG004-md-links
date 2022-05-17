@@ -3,8 +3,8 @@ const { validationPath } = require("../index.js");
 const { identifyFile } = require("../index.js");
 const { validateLink } = require("../index.js");
 /* const { mdLinks } = require('../src/cli.js') */
-const { mdLinks } = require('../index.js')
-const markdownLinkExtractor = require('markdown-link-extractor')
+const { mdLinks } = require("../index.js")
+const markdownLinkExtractor = require("markdown-link-extractor")
 
 jest.mock("link-check");
 
@@ -58,50 +58,50 @@ describe("Prueba para validar el estado de los links", () => {
   });
 });
 
-describe('mdLinks', () => {
-  it('mdLinks sin validate', () => {
-    let resultExpect = './testFileTwo.md https://es.wikipedia.org/wiki/Markdown Markdown\n' 
-    let path = './testFileTwo.md';
+describe("mdLinks", () => {
+  it("mdLinks sin validate", () => {
+    let resultExpect = "./testFileTwo.md https://es.wikipedia.org/wiki/Markdown Markdown\n"
+    let path = "./testFileTwo.md";
     return mdLinks(path, {validate:false})
     .then(respuesta => {
       expect(respuesta).toBe(resultExpect)
     })
-    .catch((err) => console.log(err, 'mensaje de error'));
+    .catch((err) => console.log(err, "mensaje de error"));
   })
 })
 
-describe('mdLinks', () => {
-  it('mdLinks con validate', () => {
-    let resultExpect = './testFileTwo.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\n' 
-    let path = './testFileTwo.md';
+describe("mdLinks", () => {
+  it("mdLinks con validate", () => {
+    let resultExpect = "./testFileTwo.md https://es.wikipedia.org/wiki/Markdown 200 Ok Markdown\n"
+    let path = "./testFileTwo.md";
     return mdLinks(path, {validate:true})
     .then(respuesta => {
       expect(respuesta).toBe(resultExpect)
     })
-    .catch((err) => console.log(err, 'mensaje de error'));
+    .catch((err) => console.log(err, "mensaje de error"));
   })
 })
 
-describe('mdLinks', () => {
-  it('mdLinks con stats', () => {
-    let resultExpect = 'Total: 1\nUnique: 1' 
-    let path = './testFileTwo.md';
+describe("mdLinks", () => {
+  it("mdLinks con stats", () => {
+    let resultExpect = "Total: 1\nUnique: 1"; 
+    let path = "./testFileTwo.md";
     return mdLinks(path, {stats:true})
     .then(respuesta => {
       expect(respuesta).toBe(resultExpect)
     })
-    .catch((err) => console.log(err, 'mensaje de error'));
+    .catch((err) => console.log(err, "mensaje de error"));
   })
 })
 
-describe('mdLinks', () => {
-  it('mdLinks con validate y stats', () => {
+describe("mdLinks", () => {
+  it("mdLinks con validate y stats", () => {
     let resultExpect = {total: 1, unique: 1, broken: 0};
-    let path = './testFileTwo.md';
+    let path = "./testFileTwo.md";
     return mdLinks(path, {validate:true, stats: true})
     .then(respuesta => {
       expect(respuesta).toEqual(resultExpect)
     })
-    .catch((err) => console.log(err, 'mensaje de error'));
+    .catch((err) => console.log(err, "mensaje de error"));
   })
 })

@@ -75,7 +75,7 @@ const linkStats = (arrayObject) => {
 } 
 
 const validateAndStats = (arrayObject, totalUnique) => {
-  let broken = arrayObject.filter((e) => e.status === 'Fail').length;
+  let broken = arrayObject.filter((e) => e.status === "Fail").length;
   // Los ... indican que pasa de {total: 82, unique: 77} a total: 82, unique: 77 -- Elimina el objeto y deja solo las propiedades
   return {...totalUnique, broken:broken};
 }
@@ -118,7 +118,7 @@ const mdLinks = (pathUser, options) => {
       })
       .then((res) => {
         if((options.validate !== true) && (options.stats !== true)) {
-          resolve(res.map((e)=> `${e.file} ${e.href} ${e.text}\n`).join(''));
+          resolve(res.map((e)=> `${e.file} ${e.href} ${e.text}\n`).join(""));
         } else if ((options.validate === true) && (options.stats === true)) {
           resolve(validateAndStats(res,linkStats(res)));
         } 
@@ -126,7 +126,7 @@ const mdLinks = (pathUser, options) => {
           resolve(`Total: ${res.total}\nUnique: ${res.unique}`);
         }
         else {
-          resolve(res.map((e)=> `${e.file} ${e.href} ${e.statusCode} ${e.status} ${e.text}\n`).join(''));
+          resolve(res.map((e)=> `${e.file} ${e.href} ${e.statusCode} ${e.status} ${e.text}\n`).join(""));
         }
       })
       .catch((error) => {
