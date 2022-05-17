@@ -80,7 +80,7 @@ const validateAndStats = (arrayObject, totalUnique) => {
   return {...totalUnique, broken:broken};
 }
 
-const mdLinks = (path, options) => {
+const mdLinks = (pathUser, options) => {
   return new Promise((resolve, reject) => {
     // Ingresa path
     //Función que convierte la ruta relativa en absoluta
@@ -144,4 +144,4 @@ const mdLinks = (path, options) => {
   })
   .catch((err) => err, "Esto es un error  de mdlink"); */
 
-  module.exports = mdLinks;
+  module.exports = { mdLinks,  validationPath, read, validateLink };
