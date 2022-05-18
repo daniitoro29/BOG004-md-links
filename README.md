@@ -52,7 +52,7 @@ Para ejecutar el módulo mdLinks, ingrese la información de la siguiente manera
 
 * Si usted no ingresa ninguna opción, la función mdLinks leerá el archivo ingresado, validará la existencia de enlaces y en caso de hallarlos, devolvera la información del archivo de la siguiente manera:
 
-![anyOptions]<img src="./img/anyoptions.jpg" />
+![anyOptions](./img/anyoptions.jpg)
 
 * `--validate`: Si usted ingresa `--validate`, se realizará una petición HTTP para validar el estado de los enlaces y se mostrará así:
 
@@ -62,7 +62,7 @@ Para ejecutar el módulo mdLinks, ingrese la información de la siguiente manera
 
 ![--stats](./img/stats.jpg)
 
-* `--validate --stats`: Si usted ingresa `--validate --stats`, la salida será un texto con estadísticas básicas de los enlaces, que incluirá la cantidad de enlaces rotos. 
+* `--validate --stats`: Si usted ingresa `--validate --stats`, la salida será un objeto con estadísticas básicas de los enlaces, que incluirá la cantidad de enlaces rotos. 
 
 ![--validate --stats](./img/validateAndStats.jpg)
 
