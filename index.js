@@ -3,6 +3,7 @@ const { resolve } = require("path");
 const path = require("path");
 const markdownLinkExtractor = require("markdown-link-extractor");
 const linkCheck = require("link-check");
+var colors = require('colors');
 
 //Esta constante guarda la ruta que se ingrese por consola
 const pathUser = process.argv[2];
@@ -118,7 +119,7 @@ const mdLinks = (pathUser, options) => {
       })
       .then((res) => {
         if((options.validate !== true) && (options.stats !== true)) {
-          resolve(res.map((e)=> `${e.file} ${e.href} ${e.text}\n`).join(""));
+          resolve(res.map((e)=> `${e.file.brightCyan} ${e.href.brightMagenta} ${e.text.brightGreen}\n`).join(""));
         } else if ((options.validate === true) && (options.stats === true)) {
           resolve(validateAndStats(res,linkStats(res)));
         } 
@@ -126,7 +127,7 @@ const mdLinks = (pathUser, options) => {
           resolve(`Total: ${res.total}\nUnique: ${res.unique}`);
         }
         else {
-          resolve(res.map((e)=> `${e.file} ${e.href} ${e.statusCode} ${e.status} ${e.text}\n`).join(""));
+          resolve(res.map((e)=> `${e.file.brightCyan} ${e.href.brightMagenta} ${e.statusCode} ${e.status.brightYellow} ${e.text.brightGreen}\n`).join(""));
         }
       })
       .catch((error) => {
