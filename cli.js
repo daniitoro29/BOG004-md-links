@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { mdLinks } = require('./index.js')
 
 
@@ -20,5 +22,3 @@ mdLinks(path = process.argv[2], thirdPosition(process))
     console.log(res);
   })
   .catch((err) => err, "Esto es un error  de mdlink");
-
-module.exports = { mdLinks }
