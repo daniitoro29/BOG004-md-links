@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "daniela-toro-md-links",
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
@@ -9,7 +9,7 @@
     "markdown-link-extractor": "^2.0.1"
   },
   "description": "Librería que permite analizar archivos .md, identifica si estos contienen links y el estado de los mismos, además devuelve estadísticas básicas sobre los links",
-  "main": "index.js",
+  "main": "cli.js",
   "directories": {
     "test": "test"
   },
