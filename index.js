@@ -3,14 +3,12 @@ const { resolve } = require("path");
 const path = require("path");
 const markdownLinkExtractor = require("markdown-link-extractor");
 const linkCheck = require("link-check");
-var colors = require('colors');
+const colors = require('colors');
 
-//Esta constante guarda la ruta que se ingrese por consola
-const pathUser = process.argv[2];
 
-const validationPath = (route) => {
+const validationPath = (pathUser) => {
   //PathAbsolute convierte la ruta relativa en absoluta
-  const pathAbsolute = path.resolve(route).normalize();
+  const pathAbsolute = path.resolve(pathUser).normalize();
   if (!path.isAbsolute(pathUser)) {
     return pathAbsolute;
   } else {
